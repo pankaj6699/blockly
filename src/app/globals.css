@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/* Blocly — mixed light + dark editorial theme (sections alternate)    */
+/* One cohesive palette: warm paper, deep ink, acid-lime accent.       */
+/* ------------------------------------------------------------------ */
+
+@theme {
+  /* Light ("paper") surfaces */
+  --color-paper: #f3f0e8;
+  --color-paper-2: #e9e4d7;
+  --color-paper-3: #ffffff;
+
+  /* Dark ("ink") surfaces */
+  --color-ink: #0a0c11;
+  --color-ink-2: #11141c;
+  --color-ink-3: #181c26;
+
+  /* Text */
+  --color-cream: #f3f0e8;
+  --color-night: #0a0c11;
+
+  /* Accent — acid lime + electric blue support */
+  --color-accent: #c7f04a;
+  --color-accent-2: #6f8dff;
+
+  /* Lines */
+  --color-line-dark: #232936;
+
+  /* Fonts */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Animations */
+  --animate-marquee: marquee 30s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-night);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-night);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: var(--color-ink); }
+::-webkit-scrollbar-thumb {
+  background: #2b3342;
+  border-radius: 9999px;
+  border: 3px solid var(--color-ink);
+}
+
+@layer utilities {
+  /* Section themes */
+  .sec-dark {
+    background-color: var(--color-ink);
+    color: var(--color-cream);
+  }
+  .sec-light {
+    background-color: var(--color-paper);
+    color: var(--color-night);
+  }
+  .sec-accent {
+    background-color: var(--color-accent);
+    color: var(--color-night);
+  }
+
+  .text-accent { color: var(--color-accent); }
+
+  /* Big editorial display type */
+  .display {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
+    text-transform: uppercase;
+  }
+
+  /* Dotted/grid texture for dark sections */
+  .grid-dark {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .grid-light {
+    background-image:
+      linear-gradient(to right, rgba(10, 12, 17, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(10, 12, 17, 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  }
+
+  .label-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+}
