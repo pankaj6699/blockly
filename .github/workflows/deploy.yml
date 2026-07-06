@@ -28,16 +28,29 @@ jobs:
           cache: npm
 
       - name: Setup Pages
+        id: pages
         uses: actions/configure-pages@v5
+
+      - name: Print Pages config
+        run: |
+          echo "base_url=${{ steps.pages.outputs.base_url }}"
+          echo "origin=${{ steps.pages.outputs.origin }}"
+          echo "host=${{ steps.pages.outputs.host }}"
+          echo "base_path=${{ steps.pages.outputs.base_path }}"
 
       - name: Install dependencies
         run: npm ci
 
+      # No basePath — site is served at https://blocly.co/ (custom domain root).
+      # Do NOT set static_site_generator: next (it injects /blockly basePath and breaks the custom domain).
       - name: Build static site
         run: npm run build
 
-      - name: Disable Jekyll processing
-        run: touch out/.nojekyll
+      - name: Verify build output
+        run: |
+          test -f out/index.html
+          test -f out/CNAME
+          grep -q "blocly.co" out/CNAME
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
