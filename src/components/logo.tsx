@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { asset } from "@/lib/assets";
 
 export function Logo({ className = "" }: { className?: string }) {
   return (
@@ -10,7 +11,7 @@ export function Logo({ className = "" }: { className?: string }) {
     >
       <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full transition-transform duration-300 ease-out group-hover:scale-105">
         <Image
-          src="/images/logo.png"
+          src={asset("/images/logo.png")}
           alt=""
           fill
           sizes="36px"

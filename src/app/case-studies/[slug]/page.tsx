@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { asset } from "@/lib/assets";
 import { caseStudies } from "@/lib/site";
 import { Container } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
@@ -37,7 +38,7 @@ export default async function CaseStudyPage({
       <section className="sec-dark relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 z-0">
           <Image
-            src="/images/hero-casestudies.png"
+            src={asset("/images/hero-casestudies.png")}
             alt=""
             fill
             priority

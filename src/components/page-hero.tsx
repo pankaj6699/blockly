@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { asset } from "@/lib/assets";
 import { Container } from "./ui/section";
 import { Icon } from "./ui/icon";
 
@@ -22,7 +23,7 @@ export function PageHero({
       {image && (
         <div className="pointer-events-none absolute inset-0 z-0">
           <Image
-            src={image}
+            src={asset(image)}
             alt=""
             fill
             priority

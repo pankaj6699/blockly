@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { asset } from "@/lib/assets";
 import { posts } from "@/lib/site";
 import { Container } from "@/components/ui/section";
 import { Icon } from "@/components/ui/icon";
@@ -55,7 +56,7 @@ export default async function BlogPostPage({
       <section className="sec-dark relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 z-0">
           <Image
-            src="/images/hero-insights.png"
+            src={asset("/images/hero-insights.png")}
             alt=""
             fill
             priority

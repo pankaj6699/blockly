@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Service } from "@/lib/site";
+import { asset } from "@/lib/assets";
 import { Icon } from "@/components/ui/icon";
 
 const GAP = 16;
@@ -99,7 +100,7 @@ export function ServicesSlider({ services }: { services: Service[] }) {
             >
               <div className="relative h-44 overflow-hidden bg-ink sm:h-48">
                 <Image
-                  src={serviceCovers[s.slug] ?? serviceCovers["blogger-outreach"]}
+                  src={asset(serviceCovers[s.slug] ?? serviceCovers["blogger-outreach"])}
                   alt=""
                   fill
                   sizes="(max-width: 640px) 88vw, 360px"

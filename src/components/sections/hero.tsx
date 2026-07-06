@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { asset } from "@/lib/assets";
 import { Container } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { publications } from "@/lib/site";
@@ -26,7 +27,7 @@ export function Hero() {
     <section id="top" className="sec-dark relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 z-0">
         <Image
-          src="/images/hero-home.png"
+          src={asset("/images/hero-home.png")}
           alt=""
           fill
           priority
