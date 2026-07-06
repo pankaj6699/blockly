@@ -1,8 +1,7 @@
 import type { NextConfig } from "next";
 
-// When deploying to GitHub Pages (https://pankaj6699.github.io/blockly/) the site
-// is served from the "/blockly" sub-path, and GitHub Pages only serves static
-// files — so we statically export the app and prefix all asset/route URLs.
+// Static export for GitHub Pages at https://blocly.co (custom domain, site root).
+// Set NEXT_PUBLIC_BASE_PATH only for sub-path previews (e.g. /blockly on github.io).
 const repoBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const nextConfig: NextConfig = {

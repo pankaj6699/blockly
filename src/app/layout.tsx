@@ -5,11 +5,13 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { site } from "@/lib/site";
 
+const siteUrl = `https://${site.domain}`;
+
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://blocly.co"),
+  metadataBase: new URL(siteUrl),
   title: `${site.name} — Premium Editorial Links & PR for Web2 + Web3`,
   description: site.description,
   keywords: [
@@ -24,9 +26,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${site.name} — Premium Editorial Links & PR`,
     description: site.description,
-    url: "https://blocly.co",
+    url: siteUrl,
     siteName: site.name,
     type: "website",
+  },
+  alternates: {
+    canonical: siteUrl,
   },
 };
 
