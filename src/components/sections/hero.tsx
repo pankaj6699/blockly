@@ -1,8 +1,7 @@
-import Image from "next/image";
-import { asset } from "@/lib/assets";
 import { Container } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { publications } from "@/lib/site";
+import { HeroBlockchainBg } from "./hero-blockchain-bg";
 
 function Marquee() {
   const row = [...publications, ...publications];
@@ -25,18 +24,8 @@ function Marquee() {
 export function Hero() {
   return (
     <section id="top" className="sec-dark relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <Image
-          src={asset("/images/hero-home.png")}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-right opacity-60"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink via-ink/92 to-ink" />
-      </div>
-      <div className="grid-dark pointer-events-none absolute inset-0 z-0 opacity-40 [mask-image:radial-gradient(ellipse_at_top,#000_30%,transparent_75%)]" />
+      <HeroBlockchainBg />
+      <div className="grid-dark pointer-events-none absolute inset-0 z-[1] opacity-25 [mask-image:radial-gradient(ellipse_at_center,#000_50%,transparent_95%)]" />
 
       <Container className="relative z-10 flex flex-col items-center pt-32 pb-20 text-center sm:pt-36 sm:pb-24">
         <div className="flex flex-wrap items-center justify-center gap-3">
