@@ -9,12 +9,12 @@ export function CtaBand({
   subtitle?: string;
 }) {
   return (
-    <section className="sec-accent">
-      <Container className="py-16 sm:py-20">
-        <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-          <div className="max-w-3xl">
-            <h2 className="display text-4xl sm:text-5xl">{title}</h2>
-            <p className="mt-5 text-lg font-medium text-night/70">{subtitle}</p>
+    <section className="sec-accent border-t border-night/10">
+      <Container className="py-14 sm:py-16">
+        <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+          <div className="max-w-2xl">
+            <h2 className="display text-3xl sm:text-4xl">{title}</h2>
+            <p className="mt-4 text-base text-night/65 sm:text-lg">{subtitle}</p>
           </div>
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
             <Button href="/contact" variant="solid-dark" size="lg" icon="arrow-right">

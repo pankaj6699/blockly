@@ -16,7 +16,6 @@ export default function CaseStudiesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Case Studies"
         image="/images/hero-casestudies.png"
         title={<>Documented results. <span className="text-accent">No vanity metrics.</span></>}
         description="Every engagement closes with attribution — what got placed, what it moved, and when we measured it."

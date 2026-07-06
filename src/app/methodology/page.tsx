@@ -33,7 +33,6 @@ export default function MethodologyPage() {
   return (
     <>
       <PageHero
-        eyebrow="Methodology"
         image="/images/hero-methodology.png"
         title={<>We score every outlet. <span className="text-accent">And we show our work.</span></>}
         description="Before we recommend a single placement, every publication is ranked on five weighted signals. Here's exactly how — no black box."
@@ -44,7 +43,6 @@ export default function MethodologyPage() {
         <Container className="py-20 sm:py-28">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-start">
             <SectionHeading
-              eyebrow="The score"
               title={<>Five signals, <span className="text-night/35">one ranking.</span></>}
               description="Each publication gets a 0–100 Blocly Score built from these weighted signals. Higher scores earn placement priority."
             />
@@ -71,7 +69,7 @@ export default function MethodologyPage() {
       {/* Principles */}
       <section className="sec-dark">
         <Container className="py-20 sm:py-28">
-          <SectionHeading onDark eyebrow="Principles" title="Why brands trust the score." />
+          <SectionHeading onDark title="Why brands trust the score." />
           <div className="mt-12 grid gap-5 sm:grid-cols-3">
             {principles.map((p) => (
               <div key={p.title} className="rounded-2xl border border-line-dark bg-ink-2 p-7">
@@ -90,7 +88,6 @@ export default function MethodologyPage() {
       <section className="sec-light">
         <Container className="py-20 sm:py-28">
           <SectionHeading
-            eyebrow="The loop"
             title={<>Scored outlets are <span className="text-night/35">step one.</span></>}
             description="The score decides where we place. Then the same disciplined cycle runs every campaign."
           />

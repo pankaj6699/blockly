@@ -5,32 +5,31 @@ import { serviceOptions } from "@/lib/site";
 import { Icon } from "./ui/icon";
 
 const inputClass =
-  "w-full rounded-xl border border-cream/15 bg-cream/5 px-4 py-3 text-sm text-cream placeholder:text-cream/40 transition-colors focus:border-accent focus:outline-none";
-const labelClass = "mb-1.5 block text-sm font-medium text-cream/80";
+  "w-full rounded-lg border border-cream/12 bg-cream/5 px-4 py-3 text-sm text-cream placeholder:text-cream/35 transition-colors focus:border-accent focus:outline-none";
+const labelClass = "mb-1.5 block font-mono text-[11px] tracking-wide text-cream/60 uppercase";
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // Front-end demo only — wire to an API route / CRM in production.
     setSubmitted(true);
   }
 
   if (submitted) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-2xl border border-cream/15 bg-cream/5 p-10 text-center">
-        <span className="grid h-14 w-14 place-items-center rounded-full bg-accent text-night">
-          <Icon name="check" size={28} />
+      <div className="panel-dark flex flex-col items-center justify-center rounded-xl border border-line-dark bg-ink-2/60 p-10 text-center">
+        <span className="grid h-12 w-12 place-items-center rounded-lg bg-accent text-night">
+          <Icon name="check" size={24} />
         </span>
-        <h3 className="mt-5 text-xl font-semibold text-cream">Request received.</h3>
-        <p className="mt-2 max-w-sm text-sm leading-relaxed text-cream/60">
+        <h3 className="mt-5 text-lg font-semibold text-cream">Request received.</h3>
+        <p className="mt-2 max-w-sm text-sm leading-relaxed text-cream/55">
           Thanks for reaching out. We respond within 24 hours with a campaign plan tailored to your brand.
         </p>
         <button
           type="button"
           onClick={() => setSubmitted(false)}
-          className="mt-6 text-sm font-semibold text-accent hover:underline"
+          className="mt-6 font-mono text-xs tracking-wide text-accent uppercase hover:underline"
         >
           Submit another request
         </button>
@@ -39,7 +38,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="rounded-2xl border border-cream/15 bg-cream/5 p-6 sm:p-8">
+    <form onSubmit={onSubmit} className="panel-dark rounded-xl border border-line-dark bg-ink-2/60 p-6 sm:p-8">
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label className={labelClass}>Full Name</label>
@@ -82,12 +81,12 @@ export function ContactForm() {
 
       <button
         type="submit"
-        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-[15px] font-semibold text-night transition-all hover:-translate-y-0.5"
+        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-night transition-all hover:brightness-105"
       >
         Submit Request
-        <Icon name="arrow-right" size={16} />
+        <Icon name="arrow-right" size={15} />
       </button>
-      <p className="mt-3 text-center text-xs text-cream/45">
+      <p className="mt-3 text-center font-mono text-[10px] tracking-wide text-cream/40 uppercase">
         We respond within 24 hours. No spam, no pushy sales calls.
       </p>
     </form>

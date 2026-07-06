@@ -15,7 +15,6 @@ export default function ContactPage() {
   return (
     <>
       <PageHero
-        eyebrow="Get Started"
         image="/images/hero-contact.png"
         title={<>From <span className="text-accent">visibility</span> to market leadership.</>}
         description="Tell us about your brand and what you need. We'll put together a campaign plan and get your first placement live within 5 business days."

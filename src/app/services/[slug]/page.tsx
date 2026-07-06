@@ -37,7 +37,6 @@ export default async function ServiceDetailPage({
   return (
     <>
       <PageHero
-        eyebrow={`Service ${service.num}`}
         image="/images/hero-services.png"
         title={service.name}
         description={service.longDescription}
@@ -54,10 +53,70 @@ export default async function ServiceDetailPage({
 
       <section className="sec-light">
         <Container className="py-20 sm:py-28">
+          <div className="max-w-3xl">
+            <h2 className="display text-3xl sm:text-4xl">Choose your package</h2>
+          </div>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {service.packages.map((pkg) => (
+              <div
+                key={pkg.name}
+                className={`relative flex h-full flex-col rounded-2xl p-6 ${
+                  pkg.featured
+                    ? "bg-ink text-cream ring-2 ring-accent"
+                    : "border border-night/10 bg-paper-3"
+                }`}
+              >
+                {pkg.featured && (
+                  <span className="absolute -top-3 left-6 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-night">
+                    Most popular
+                  </span>
+                )}
+                <h3 className={`text-lg font-semibold uppercase tracking-tight ${pkg.featured ? "text-cream" : "text-night"}`}>
+                  {pkg.name}
+                </h3>
+                {pkg.blurb && (
+                  <p className={`mt-1 text-sm ${pkg.featured ? "text-cream/55" : "text-night/55"}`}>{pkg.blurb}</p>
+                )}
+                <div className="mt-4 flex items-end gap-2">
+                  <span className={`text-3xl font-semibold tracking-tight ${pkg.featured ? "text-accent" : "text-night"}`}>
+                    {pkg.price}
+                  </span>
+                  {pkg.cadence && (
+                    <span className={`mb-1 text-sm ${pkg.featured ? "text-cream/50" : "text-night/50"}`}>
+                      {pkg.cadence}
+                    </span>
+                  )}
+                </div>
+                <ul className={`mt-5 flex-1 space-y-2.5 border-t pt-5 ${pkg.featured ? "border-line-dark" : "border-night/10"}`}>
+                  {pkg.features.map((f) => (
+                    <li
+                      key={f}
+                      className={`flex items-start gap-2 text-sm ${pkg.featured ? "text-cream/75" : "text-night/70"}`}
+                    >
+                      <Icon name="check" size={15} className="mt-0.5 shrink-0 text-accent" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <Button
+                  href="/contact"
+                  variant={pkg.featured ? "accent" : "solid-dark"}
+                  size="md"
+                  className="mt-6 w-full"
+                >
+                  Order now
+                </Button>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="sec-light border-t border-night/10">
+        <Container className="py-20 sm:py-28">
           <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr] lg:items-start">
             <div>
-              <span className="label-eyebrow text-night/55">— What you get</span>
-              <h2 className="display mt-5 text-3xl sm:text-4xl">Deliverables</h2>
+              <h2 className="display text-3xl sm:text-4xl">Deliverables</h2>
               <ul className="mt-8 space-y-4">
                 {service.deliverables.map((d) => (
                   <li key={d} className="flex items-start gap-3 text-night/75">

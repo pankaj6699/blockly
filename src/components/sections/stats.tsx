@@ -40,13 +40,13 @@ function CountUp({ value, suffix }: { value: number; suffix: string }) {
 
 export function Stats() {
   return (
-    <div className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
+    <div className="grid grid-cols-2 divide-x divide-y divide-line-dark bg-ink-2/60 lg:grid-cols-4 lg:divide-y-0">
       {stats.map((s) => (
-        <div key={s.label}>
-          <div className="font-mono text-4xl font-semibold text-accent sm:text-5xl">
+        <div key={s.label} className="p-6 sm:p-8">
+          <div className="font-mono text-3xl font-medium tracking-tight text-accent sm:text-4xl">
             <CountUp value={s.value} suffix={s.suffix} />
           </div>
-          <div className="mt-2 text-sm text-cream/55">{s.label}</div>
+          <div className="mt-2 font-mono text-[11px] tracking-wide text-cream/45 uppercase">{s.label}</div>
         </div>
       ))}
     </div>

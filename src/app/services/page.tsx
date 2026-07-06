@@ -11,17 +11,16 @@ import { services, process } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Guest posts, crypto & mainstream PR, long-form research, KOL campaigns, and GEO-targeted distribution — six precision services for Web2 + Web3 brands.",
+    "Blogger outreach, digital PR campaigns, Web3 media placement, brand mentions, and white label services — five precision services for Web2 + Web3 brands.",
 };
 
 export default function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="What We Do"
         image="/images/hero-services.png"
         title={<>Every channel. <span className="text-accent">One direction.</span></>}
-        description="Six precision services, one outcome — your brand at the top of the conversation in every market that matters to you. Buy à la carte or bundle into a retainer."
+        description="Five precision services, one outcome — your brand at the top of the conversation in every market that matters to you. Buy à la carte or bundle into a retainer."
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <Button href="/contact" variant="accent" size="lg" icon="arrow-right">
@@ -69,7 +68,6 @@ export default function ServicesPage() {
         <Container className="py-20 sm:py-28">
           <SectionHeading
             onDark
-            eyebrow="How It Works"
             title={<>A closed loop, <span className="text-accent">not a one-off.</span></>}
             description="Every engagement runs the same disciplined cycle — so you always know what was done and what it moved."
           />
@@ -88,7 +86,7 @@ export default function ServicesPage() {
       {/* FAQ */}
       <section className="sec-light">
         <Container className="py-20 sm:py-28">
-          <SectionHeading eyebrow="FAQ" title="Questions, answered." />
+          <SectionHeading title="Questions, answered." />
           <div className="mt-12">
             <FaqList />
           </div>

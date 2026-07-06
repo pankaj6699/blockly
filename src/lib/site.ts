@@ -19,9 +19,8 @@ export const nav = [
   { label: "Services", href: "/services" },
   { label: "Pricing", href: "/pricing" },
   { label: "Case Studies", href: "/case-studies" },
-  { label: "Methodology", href: "/methodology" },
-  { label: "Insights", href: "/insights" },
-  { label: "About", href: "/about" },
+  { label: "Blog", href: "/blog" },
+  { label: "About Us", href: "/about" },
 ] as const;
 
 /** Publication logos that scroll in the hero marquee. */
@@ -42,6 +41,15 @@ export const publications: string[] = [
   "Business Insider",
 ];
 
+export type ServicePackage = {
+  name: string;
+  price: string;
+  cadence?: string;
+  blurb?: string;
+  features: string[];
+  featured?: boolean;
+};
+
 export type Service = {
   num: string;
   slug: string;
@@ -52,116 +60,334 @@ export type Service = {
   tags: string[];
   deliverables: string[];
   idealFor: string;
+  packages: ServicePackage[];
 };
 
 export const services: Service[] = [
   {
     num: "01",
-    slug: "guest-post-placements",
-    name: "Guest Post Placements",
+    slug: "blogger-outreach",
+    name: "Blogger Outreach",
     icon: "pen",
     description:
-      "Do-follow links in genuine editorial content on DA 50–90+ publications. Full anchor control, no PBNs, no advertorial tags.",
+      "Natural, in-content editorial links from real bloggers. Ghost-written content, DR guaranteed, lifetime link guarantee — you take the credit.",
     longDescription:
-      "We secure do-follow placements inside genuine editorial content — never PBNs, never advertorial-tagged filler. You get full anchor-text control on publications scored DA 50–90+, with each placement reported as a live, indexable URL.",
-    tags: ["DA 50–90+", "Do-Follow", "Editorial"],
+      "Save 100+ hours of outreach. We secure natural, relevant, in-content links straight from bloggers — ghost posts, not guest posts. Every placement includes writing, DR and traffic guarantees, and a lifetime link guarantee with 100% money-back protection.",
+    tags: ["DR Guaranteed", "Do-Follow", "Includes Writing"],
     deliverables: [
-      "Do-follow link on DA 50–90+ publication",
-      "Full anchor-text control",
-      "Genuine editorial context (no 'sponsored' tag)",
-      "Live URL + DA report on delivery",
+      "Genuine editorial in-content link (not author bio)",
+      "Magazine-quality ghost-written content",
+      "DR and Ahrefs traffic guaranteed at placement",
+      "1 anchor / URL per placement, no duplicate domains",
+      "White-label placement report",
+      "Lifetime link guarantee & money-back protection",
     ],
-    idealFor: "Brands building durable domain authority and high-intent referral traffic.",
+    idealFor: "SEO teams and agencies building authority with natural, resellable blogger outreach.",
+    packages: [
+      {
+        name: "DR10+",
+        price: "$72",
+        cadence: "/ placement",
+        blurb: "0–1,000 monthly traffic",
+        features: ["DR 10+ guaranteed", "From 14 days delivery", "Includes writing", "Do-follow link"],
+      },
+      {
+        name: "DR20+",
+        price: "$96",
+        cadence: "/ placement",
+        blurb: "0–5k monthly traffic",
+        features: ["DR 20+ guaranteed", "From 14 days delivery", "Includes writing", "Do-follow link"],
+      },
+      {
+        name: "DR30+",
+        price: "$120",
+        cadence: "/ placement",
+        blurb: "100–10k monthly traffic",
+        featured: true,
+        features: ["DR 30+ guaranteed", "Most popular tier", "Includes writing", "Do-follow link"],
+      },
+      {
+        name: "DR40+",
+        price: "$216",
+        cadence: "/ placement",
+        blurb: "500–20k monthly traffic",
+        features: ["DR 40+ guaranteed", "Includes writing", "Do-follow link", "Ahrefs traffic guaranteed"],
+      },
+      {
+        name: "DR50+",
+        price: "$336",
+        cadence: "/ placement",
+        blurb: "1k–30k monthly traffic",
+        features: ["DR 50+ guaranteed", "Includes writing", "Do-follow link", "Ahrefs traffic guaranteed"],
+      },
+      {
+        name: "DR60+",
+        price: "$456",
+        cadence: "/ placement",
+        blurb: "1k–60k monthly traffic",
+        features: ["DR 60+ guaranteed", "Includes writing", "Do-follow link", "Lifetime link guarantee"],
+      },
+    ],
   },
   {
     num: "02",
-    slug: "crypto-web3-pr",
-    name: "Crypto & Web3 PR",
-    icon: "bolt",
+    slug: "digital-pr-campaigns",
+    name: "Digital PR Campaigns",
+    icon: "megaphone",
     description:
-      "Placement in the top blockchain media: Cointelegraph, Decrypt, The Block, CoinDesk, BeInCrypto. Token launches to protocol updates.",
+      "Guaranteed journalist links from authority news and media. Expert commentary and data campaigns with DR 50–95 placements.",
     longDescription:
-      "From token launches to protocol updates, we place your story in the blockchain media your community actually reads — Cointelegraph, Decrypt, The Block, CoinDesk, BeInCrypto and more — with messaging tuned for crypto-native audiences.",
-    tags: ["Cointelegraph", "Decrypt", "The Block"],
+      "The most powerful links you can get. Our team crafts expert commentary and data-driven stories, then pitches journalists until we hit your guaranteed link minimum — in-content placements from authority outlets with 100k–100m+ traffic.",
+    tags: ["DR 50–95", "Journalist Links", "Guaranteed Coverage"],
     deliverables: [
-      "Placement in tier-1 crypto media",
-      "Crypto-native angle & messaging",
-      "Launch / milestone announcement support",
-      "Coverage report with live links",
+      "Guaranteed minimum journalist links per campaign",
+      "In-content links from DR 50–95+ publications",
+      "Unlimited story angles pitched until goals are met",
+      "100k–100m+ SimilarWeb traffic placements",
+      "White-label pitch and coverage report",
+      "100% money-back if guarantees aren't met",
     ],
-    idealFor: "Token launches, mainnet milestones, raises, and protocol announcements.",
+    idealFor: "Brands and agencies that need tier-1 media coverage with guaranteed link minimums.",
+    packages: [
+      {
+        name: "Starter Campaign",
+        price: "$4,200",
+        cadence: "/ campaign",
+        blurb: "5+ links guaranteed",
+        features: [
+          "5+ in-content journalist links",
+          "DR 50–95+ placements",
+          "100k–100m traffic sites",
+          "Unlimited stories created",
+          "Up to 90 days delivery",
+        ],
+      },
+      {
+        name: "National Campaign",
+        price: "$6,600",
+        cadence: "/ campaign",
+        blurb: "10+ links guaranteed",
+        featured: true,
+        features: [
+          "10+ in-content journalist links",
+          "DR 50–95+ placements",
+          "100k–100m traffic sites",
+          "Unlimited stories created",
+          "Up to 90 days delivery",
+        ],
+      },
+      {
+        name: "Viral Campaign",
+        price: "$10,200",
+        cadence: "/ campaign",
+        blurb: "20+ links guaranteed",
+        features: [
+          "20+ in-content journalist links",
+          "DR 50–95+ placements",
+          "100k–100m traffic sites",
+          "Unlimited stories created",
+          "Up to 90 days delivery",
+        ],
+      },
+    ],
   },
   {
     num: "03",
-    slug: "mainstream-media-pr",
-    name: "Mainstream Media PR",
-    icon: "newspaper",
+    slug: "web3-media-placement",
+    name: "Web3 Media Placement",
+    icon: "bolt",
     description:
-      "Forbes, Bloomberg, Nasdaq.com, Yahoo Finance, Business Insider. Brand authority at scale for founders and protocols.",
+      "Guaranteed crypto and blockchain press coverage with 300+ media syndication. Editorial assistance, SEO optimization, and metric reports included.",
     longDescription:
-      "Earn the credibility of mainstream business media. We place founders and protocols in Forbes, Bloomberg, Nasdaq.com, Yahoo Finance and Business Insider — the names that build trust with institutions, partners, and the press that follows them.",
-    tags: ["Forbes", "Bloomberg", "Yahoo Finance"],
+      "Amplify your crypto and blockchain news with guaranteed coverage on leading Web3 outlets. Every package delivers wide industry distribution, editorial support, SEO optimization, and full metric reporting — built for token launches, protocol updates, and milestone announcements.",
+    tags: ["Guaranteed Coverage", "300+ Syndication", "Crypto Native"],
     deliverables: [
-      "Tier-1 mainstream business placement",
-      "Founder positioning & thought leadership",
-      "Institutional-grade credibility signal",
-      "Live URL + reach report",
+      "Guaranteed publication on tier crypto outlets",
+      "300+ media syndication network",
+      "Editorial assistance & SEO optimization",
+      "1–2 images included per release",
+      "Full metric and coverage report",
+      "Sector-specific package options",
     ],
-    idealFor: "Founders and protocols raising, partnering, or scaling beyond crypto-native audiences.",
+    idealFor: "Crypto projects, DeFi protocols, and Web3 brands launching news that needs guaranteed distribution.",
+    packages: [
+      {
+        name: "Starter",
+        price: "$2,000",
+        cadence: "/ package",
+        blurb: "2M+ monthly visitors",
+        features: ["Guaranteed publications", "300+ media syndication", "Editorial assistance", "Metric reports"],
+      },
+      {
+        name: "Tech",
+        price: "$2,000",
+        cadence: "/ package",
+        blurb: "10M+ monthly visitors",
+        features: ["Guaranteed publications", "300+ media syndication", "SEO optimization", "1–2 images included"],
+      },
+      {
+        name: "Premium",
+        price: "$3,000",
+        cadence: "/ package",
+        blurb: "5M+ monthly visitors",
+        featured: true,
+        features: ["Guaranteed publication", "300+ media syndication", "Editorial assistance", "Metric reports"],
+      },
+      {
+        name: "FinTech",
+        price: "$3,000",
+        cadence: "/ package",
+        blurb: "10M+ monthly visitors",
+        features: ["Guaranteed publications", "300+ media syndication", "FinTech-focused distribution", "Metric reports"],
+      },
+      {
+        name: "Web3 Gaming",
+        price: "$4,000",
+        cadence: "/ package",
+        blurb: "10M+ monthly visitors",
+        features: ["Guaranteed publications", "300+ media syndication", "Gaming-sector targeting", "Metric reports"],
+      },
+      {
+        name: "Viral",
+        price: "$7,000",
+        cadence: "/ package",
+        blurb: "15M+ monthly visitors",
+        features: ["Guaranteed publications", "300+ media syndication", "Maximum reach package", "Metric reports"],
+      },
+    ],
   },
   {
     num: "04",
-    slug: "long-form-research",
-    name: "Long-Form Research",
-    icon: "chart",
+    slug: "brand-mentions",
+    name: "Brand Mentions",
+    icon: "sparkles",
     description:
-      "2,000–8,000 word SEO-first research articles, guides, and deep-dives ghost-written by industry experts. Ranks and converts.",
+      "Strategic listicle and brand mentions on high-authority sites. Strengthen E-E-A-T signals and appear in Google AI Overviews and LLMs.",
     longDescription:
-      "SEO-first research articles, guides, and deep-dives from 2,000–8,000 words, ghost-written by industry experts. Built to rank for competitive terms and convert the readers who find them.",
-    tags: ["2K–8K words", "SEO-first", "Ghost-written"],
+      "Get your brand featured where it matters most. We place contextually relevant mentions in listicles, comparison posts, and editorial roundups on high-authority websites — driving organic traffic and building the credibility signals search engines and AI models reward.",
+    tags: ["Listicles", "DR 30–60", "E-E-A-T Signals"],
     deliverables: [
-      "2,000–8,000 word expert-written piece",
-      "Keyword & SERP-gap research",
-      "On-page SEO + internal linking plan",
-      "Editing, fact-check, and revisions",
+      "Contextually relevant brand mentions in editorial content",
+      "Listicle, comparison, and review placements",
+      "Do-follow links on vetted high-authority sites",
+      "Dedicated campaign manager",
+      "Delivery within 4–6 weeks depending on tier",
+      "Basic to advanced reporting by package",
     ],
-    idealFor: "Protocols competing on organic search and educating a complex audience.",
+    idealFor: "Brands building visibility, E-E-A-T authority, and AI search presence through strategic mentions.",
+    packages: [
+      {
+        name: "Starter Listicle",
+        price: "$1,500",
+        cadence: "/ campaign",
+        blurb: "Early visibility campaigns",
+        features: [
+          "5 listicle placements",
+          "Ahrefs DR 30–60",
+          "1,000+ organic traffic / site",
+          "Do-follow links",
+          "Delivery in 4 weeks",
+        ],
+      },
+      {
+        name: "Growth Listicle",
+        price: "$4,000",
+        cadence: "/ campaign",
+        blurb: "Scaling authority",
+        featured: true,
+        features: [
+          "6 listicle placements",
+          "Ahrefs DR 30–60",
+          "Comparison / review lists",
+          "Short brand description",
+          "Delivery in 5 weeks",
+        ],
+      },
+      {
+        name: "Authority Listicle",
+        price: "$10,000",
+        cadence: "/ campaign",
+        blurb: "Category leadership",
+        features: [
+          "10 listicle placements",
+          "Premium editorial lists",
+          "Featured brand section",
+          "Advanced reporting",
+          "Delivery in 6 weeks",
+        ],
+      },
+      {
+        name: "Custom Plan",
+        price: "Custom",
+        cadence: "",
+        blurb: "Enterprise campaigns",
+        features: [
+          "Custom placement volume",
+          "Custom DR range & traffic",
+          "Priority delivery",
+          "Tailored to your brief",
+        ],
+      },
+    ],
   },
   {
     num: "05",
-    slug: "kol-campaigns",
-    name: "KOL Campaigns",
-    icon: "users",
+    slug: "white-label-services",
+    name: "White Label Services",
+    icon: "shield",
     description:
-      "Key Opinion Leader campaigns on X (Twitter), YouTube, and Telegram. Vetted for real engagement — zero bot audiences.",
+      "Resell Blocly's full link-building and PR stack under your brand. White-label reports, dedicated support, and volume pricing for agencies.",
     longDescription:
-      "Key Opinion Leader campaigns across X (Twitter), YouTube, and Telegram. Every creator is screened for authentic engagement and on-chain activity — zero bot audiences — so you only pay for reach that's real.",
-    tags: ["Twitter/X", "YouTube", "Telegram"],
+      "Built for agencies and resellers. Order any Blocly service on behalf of your clients with fully white-labeled reports — your clients never know we were involved. Get dedicated account management, client tagging, volume discounts, and priority fulfillment as you scale.",
+    tags: ["White Label", "Agency Ready", "Volume Pricing"],
     deliverables: [
-      "Vetted KOL shortlist with audience data",
-      "Campaign brief & creator coordination",
-      "Engagement & reach verification",
-      "Per-post performance reporting",
+      "Fully white-labeled placement and campaign reports",
+      "Client tagging and order tracking in your dashboard",
+      "Access to all Blocly services at reseller rates",
+      "Dedicated account manager",
+      "Priority fulfillment and support",
+      "Volume discounts on monthly spend",
     ],
-    idealFor: "Launches and growth pushes that need trusted, crypto-native reach.",
-  },
-  {
-    num: "06",
-    slug: "geo-targeted-pr",
-    name: "GEO-Targeted PR",
-    icon: "globe",
-    description:
-      "Region-specific campaigns in MENA, APAC, LATAM, Eastern Europe, SEA. Native language, local publishers, regional KOLs.",
-    longDescription:
-      "We don't just translate — we localize. Region-specific campaigns across MENA, APAC, LATAM, Eastern Europe and SEA, delivered in native language through local publishers and regional KOLs who own the conversation in-market.",
-    tags: ["MENA", "APAC", "LATAM"],
-    deliverables: [
-      "Native-language localization",
-      "Regional publisher placements",
-      "Local KOL activation",
-      "Region-level performance reporting",
+    idealFor: "SEO agencies, digital PR firms, and marketing shops reselling link building and PR to their clients.",
+    packages: [
+      {
+        name: "Reseller",
+        price: "From $1,500",
+        cadence: "/ month",
+        blurb: "Solo agencies getting started",
+        features: [
+          "White-label reports on every order",
+          "Client tagging & order tracking",
+          "Pay-as-you-go placement pricing",
+          "Email support",
+        ],
+      },
+      {
+        name: "Agency Partner",
+        price: "From $4,000",
+        cadence: "/ month",
+        blurb: "Growing agencies at scale",
+        featured: true,
+        features: [
+          "Everything in Reseller",
+          "10% volume discount on monthly spend",
+          "Dedicated account manager",
+          "Priority turnaround",
+        ],
+      },
+      {
+        name: "Enterprise",
+        price: "Custom",
+        cadence: "",
+        blurb: "Large agencies & networks",
+        features: [
+          "Custom volume pricing",
+          "Full rebrand options",
+          "Custom SLAs & fulfillment",
+          "Quarterly business reviews",
+        ],
+      },
     ],
-    idealFor: "Brands expanding into high-growth regions that Western campaigns miss.",
   },
 ];
 
@@ -209,10 +435,10 @@ export const reasons: Reason[] = [
 export type Stat = { value: number; suffix: string; label: string };
 
 export const stats: Stat[] = [
-  { value: 2500, suffix: "+", label: "Links Placed" },
-  { value: 200, suffix: "+", label: "Tier-1 Publications" },
-  { value: 5, suffix: "", label: "Global Regions" },
-  { value: 100, suffix: "%", label: "Placement Success Rate" },
+  { value: 5000, suffix: "+", label: "Links Placed" },
+  { value: 250, suffix: "+", label: "Tier-1 Publications" },
+  { value: 5, suffix: "+", label: "Global Regions" },
+  { value: 98, suffix: "%", label: "Placement Success Rate" },
 ];
 
 export type Step = { num: string; title: string; description: string };
@@ -321,12 +547,11 @@ export const contactHighlights: ContactHighlight[] = [
 ];
 
 export const serviceOptions: string[] = [
-  "Guest Post Placements",
-  "Crypto & Web3 PR",
-  "Mainstream Media PR",
-  "Long-Form Research Articles",
-  "KOL Campaigns",
-  "GEO-Targeted Campaigns",
+  "Blogger Outreach",
+  "Digital PR Campaigns",
+  "Web3 Media Placement",
+  "Brand Mentions",
+  "White Label Services",
   "Full Campaign Package",
 ];
 
@@ -397,7 +622,7 @@ export type Faq = { q: string; a: string };
 export const faqs: Faq[] = [
   {
     q: "Do you guarantee placements?",
-    a: "Yes. We work from pre-negotiated editorial relationships, so you pay for a live URL — not a pitch. Every placement is reported with a verifiable link and DA score.",
+    a: "Yes. Blogger outreach, digital PR, and Web3 media packages all come with guaranteed minimums. Every placement is reported with a verifiable live URL and metrics.",
   },
   {
     q: "Are these real editorial links or advertorials?",
@@ -409,15 +634,11 @@ export const faqs: Faq[] = [
   },
   {
     q: "How fast do placements go live?",
-    a: "Your first placement is typically live in 5–14 business days depending on the outlet. KOL activations follow creator schedules, usually within 1–3 weeks.",
+    a: "Blogger outreach typically delivers from 14 days. Digital PR campaigns run up to 90 days. Web3 media packages and brand mention campaigns deliver within 4–6 weeks depending on the tier.",
   },
   {
-    q: "Do you vet KOLs for fake engagement?",
-    a: "Every creator passes our 7-point vetting framework — authentic engagement analysis and on-chain activity checks — before we recommend them. Zero bot audiences.",
-  },
-  {
-    q: "Which regions can you run GEO campaigns in?",
-    a: "MENA, APAC, LATAM, Eastern Europe, and SEA — delivered in native language through local publishers and regional KOLs, not machine translation.",
+    q: "Can I resell your services under my brand?",
+    a: "Yes. Our White Label program provides fully branded reports on every order. Your clients never see Blocly — you take the credit while we handle fulfillment.",
   },
 ];
 

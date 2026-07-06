@@ -7,19 +7,18 @@ import { CtaBand } from "@/components/blocks/cta-band";
 import { posts } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Insights",
+  title: "Blog",
   description:
     "Playbooks and analysis on crypto PR, link building, KOL vetting, GEO campaigns, and Web3 growth — from the team that runs them.",
 };
 
-export default function InsightsPage() {
+export default function BlogPage() {
   const featured = posts.find((p) => p.featured) ?? posts[0];
   const rest = posts.filter((p) => p !== featured);
 
   return (
     <>
       <PageHero
-        eyebrow="Intelligence Feed"
         image="/images/hero-insights.png"
         title={<>What we know. <span className="text-accent">What you should too.</span></>}
         description="Data-led playbooks on getting cited, covered, and discovered — written by the team that does it daily."
@@ -27,9 +26,8 @@ export default function InsightsPage() {
 
       <section className="sec-light">
         <Container className="py-20 sm:py-28">
-          {/* Featured */}
           <Link
-            href={`/insights/${featured.slug}`}
+            href={`/blog/${featured.slug}`}
             className="group grid overflow-hidden rounded-2xl border border-night/10 bg-paper-3 transition-colors hover:border-night/25 lg:grid-cols-2"
           >
             <div className="relative min-h-56 overflow-hidden border-b border-night/10 bg-ink lg:border-b-0 lg:border-r lg:border-line-dark">
@@ -56,12 +54,11 @@ export default function InsightsPage() {
             </div>
           </Link>
 
-          {/* Rest */}
           <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {rest.map((p) => (
               <Link
                 key={p.slug}
-                href={`/insights/${p.slug}`}
+                href={`/blog/${p.slug}`}
                 className="group flex flex-col rounded-2xl border border-night/10 bg-paper-3 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-night/25"
               >
                 <div className="flex items-center gap-2 text-xs text-night/45">

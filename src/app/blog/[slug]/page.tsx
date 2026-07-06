@@ -18,7 +18,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = posts.find((p) => p.slug === slug);
-  if (!post) return { title: "Insight" };
+  if (!post) return { title: "Blog" };
   return { title: post.title, description: post.excerpt };
 }
 
@@ -41,7 +41,7 @@ const body = [
   },
 ];
 
-export default async function InsightPage({
+export default async function BlogPostPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -68,11 +68,11 @@ export default async function InsightPage({
         <div className="grid-dark pointer-events-none absolute inset-0 z-0 opacity-40 [mask-image:radial-gradient(ellipse_at_top,#000_20%,transparent_70%)]" />
         <Container className="relative z-10 max-w-3xl pt-28 pb-14 sm:pt-32">
           <Link
-            href="/insights"
+            href="/blog"
             className="inline-flex items-center gap-1.5 text-sm text-cream/60 transition-colors hover:text-cream"
           >
             <Icon name="arrow-right" size={14} className="rotate-180" />
-            All insights
+            All articles
           </Link>
           <div className="mt-6 flex items-center gap-3 text-xs text-cream/55">
             <span className="rounded-full border border-cream/20 px-3 py-1 font-semibold text-accent">

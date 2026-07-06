@@ -9,7 +9,7 @@ import { CtaBand } from "@/components/blocks/cta-band";
 import { values, team, scoringSignals } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Us",
   description:
     "Blocly is a crypto-native PR and link-building agency operating natively across Web2 and Web3 — guaranteed editorial placements, measured every time.",
 };
@@ -18,7 +18,6 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="About Blocly"
         image="/images/hero-about.png"
         title={<>We own the channels <span className="text-accent">that move markets.</span></>}
         description="Blocly is a PR and link-building agency built for high-growth Web2 and Web3 brands. One team, native in both ecosystems, with pre-negotiated editorial relationships across 200+ publications."
@@ -36,7 +35,6 @@ export default function AboutPage() {
         <Container className="py-20 sm:py-28">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
             <SectionHeading
-              eyebrow="Our story"
               title={<>From scattered spend to <span className="text-night/35">guaranteed placements.</span></>}
             />
             <div className="space-y-4 text-[15px] leading-relaxed text-night/70">
@@ -63,7 +61,7 @@ export default function AboutPage() {
       {/* Values */}
       <section className="sec-dark">
         <Container className="py-20 sm:py-28">
-          <SectionHeading onDark eyebrow="What we stand for" title="The principles behind every campaign." />
+          <SectionHeading onDark title="The principles behind every campaign." />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((v) => (
               <div key={v.title} className="rounded-2xl border border-line-dark bg-ink-2 p-6">
@@ -84,7 +82,6 @@ export default function AboutPage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div>
               <SectionHeading
-                eyebrow="Open methodology"
                 title={<>We score every outlet. <span className="text-night/35">And we show our work.</span></>}
                 description="No black box. We rank publications on five weighted signals before a single placement is recommended."
               />
@@ -114,7 +111,7 @@ export default function AboutPage() {
       {/* Team */}
       <section className="sec-dark">
         <Container className="py-20 sm:py-28">
-          <SectionHeading onDark eyebrow="The team" title="One point of contact. A full campaign crew." />
+          <SectionHeading onDark title="One point of contact. A full campaign crew." />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {team.map((m) => (
               <div key={m.name} className="rounded-2xl border border-line-dark bg-ink-2 p-6 text-center">

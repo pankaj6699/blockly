@@ -18,7 +18,6 @@ export default function PricingPage() {
   return (
     <>
       <PageHero
-        eyebrow="Pricing"
         image="/images/hero-pricing.png"
         title={<>Pay for a live URL. <span className="text-accent">Not a maybe.</span></>}
         description="Start with a single placement or scale with an always-on retainer. No vendor clutter, no hidden fees — and you can pay in crypto."
@@ -88,7 +87,6 @@ export default function PricingPage() {
         <Container className="py-20 sm:py-24">
           <SectionHeading
             onDark
-            eyebrow="À la carte"
             title="Prefer to buy one service at a time?"
             description="Every service is available standalone. Mix and match to build exactly the campaign you need."
           />
@@ -108,7 +106,7 @@ export default function PricingPage() {
       {/* Reviews */}
       <section className="sec-light">
         <Container className="py-20 sm:py-24">
-          <SectionHeading eyebrow="What clients say" title="Trusted by teams who measure everything." />
+          <SectionHeading title="Trusted by teams who measure everything." />
           <div className="mt-10">
             <Reviews />
           </div>
@@ -118,7 +116,7 @@ export default function PricingPage() {
       {/* FAQ */}
       <section className="sec-dark">
         <Container className="py-20 sm:py-24">
-          <SectionHeading onDark eyebrow="FAQ" title="Questions, answered." />
+          <SectionHeading onDark title="Questions, answered." />
           <div className="mt-10">
             <FaqList onDark />
           </div>
