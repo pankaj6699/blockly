@@ -14,6 +14,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: `${site.name} — Premium Editorial Links & PR for Web2 + Web3`,
   description: site.description,
+  icons: {
+    icon: "/images/logo.png",
+    apple: "/images/logo.png",
+  },
   keywords: [
     "guest post placements",
     "crypto PR",
