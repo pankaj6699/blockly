@@ -46,6 +46,9 @@ jobs:
       - name: Build static site
         run: npm run build
 
+      - name: Copy CNAME to out directory
+        run: cp public/CNAME out/CNAME
+
       - name: Verify build output
         run: |
           test -f out/index.html
