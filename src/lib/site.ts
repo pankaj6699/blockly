@@ -511,7 +511,7 @@ export const posts: Post[] = [
     `,
   },
   {
-    slug: "kol-vetting-framework",
+    slug: "the-kol-vetting-framework-every-crypto-project-needs",
     category: "Strategy",
     readTime: "6 min read",
     title: "The KOL Vetting Framework Every Crypto Project Needs",
@@ -533,7 +533,7 @@ export const posts: Post[] = [
     `,
   },
   {
-    slug: "mena-crypto-pr-guide",
+    slug: "breaking-into-the-mena-market-a-2025-crypto-pr-guide",
     category: "MENA",
     readTime: "10 min read",
     title: "Breaking Into the MENA Market: A 2025 Crypto PR Guide",
