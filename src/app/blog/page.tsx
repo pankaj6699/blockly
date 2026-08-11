@@ -14,8 +14,9 @@ export const metadata: Metadata = {
 
 export default async function BlogPage() {
   const posts = await getBlogPosts();
+  if (!posts || posts.length === 0) return null;
   const featured = posts.find((p) => p.featured) ?? posts[0];
-  const rest = posts.filter((p) => p !== featured);
+  const rest = posts.filter((p) => p.slug !== featured?.slug);
 
   return (
     <>

@@ -7,8 +7,10 @@ import { FeaturedPostSlider } from "./featured-post-slider";
 
 export async function Blog() {
   const posts = await getBlogPosts();
+  if (!posts || posts.length === 0) return null;
+
   const featured = posts.find((p) => p.featured) ?? posts[0];
-  const rest = posts.filter((p) => p !== featured);
+  const rest = posts.filter((p) => p.slug !== featured?.slug);
   const sliderPosts = posts.slice(0, 4);
 
   return (
@@ -33,18 +35,22 @@ export async function Blog() {
         <div className="mt-12 grid gap-4 lg:grid-cols-2">
           <FeaturedPostSlider posts={sliderPosts} />
 
-          <div className="grid gap-4">
-            {rest.slice(0, 2).map((p) => (
+          {rest.length > 0 && (
+            <div className="grid gap-4">
+              {rest.slice(0, 2).map((p) => (
+                <PostCard key={p.slug} post={p} />
+              ))}
+            </div>
+          )}
+        </div>
+
+        {rest.length > 2 && (
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {rest.slice(2).map((p) => (
               <PostCard key={p.slug} post={p} />
             ))}
           </div>
-        </div>
-
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {rest.slice(2).map((p) => (
-            <PostCard key={p.slug} post={p} />
-          ))}
-        </div>
+        )}
 
         <div className="panel-dark mt-12 overflow-hidden rounded-xl border border-line-dark bg-ink p-8 text-cream sm:p-10">
           <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">

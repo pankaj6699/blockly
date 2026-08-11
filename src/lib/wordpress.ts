@@ -8,6 +8,7 @@ export type WordPressPost = {
   content: { rendered: string };
   date: string;
   featured_media?: number;
+  sticky?: boolean;
   acf?: Record<string, unknown>;
 };
 
@@ -63,16 +64,22 @@ async function fetchWordPressJson<T>(path: string): Promise<T[]> {
     return [];
   }
 
-  const endpoint = `${apiUrl}${path.startsWith("/") ? path : `/${path}`}`;
-  const response = await fetch(endpoint, {
-    next: { revalidate: 60 },
-  });
+  try {
+    const endpoint = `${apiUrl}${path.startsWith("/") ? path : `/${path}`}`;
+    const response = await fetch(endpoint, {
+      next: { revalidate: 60 },
+    });
 
-  if (!response.ok) {
-    throw new Error(`WordPress request failed with status ${response.status}`);
+    if (!response.ok) {
+      console.warn(`WordPress request to ${endpoint} failed with status ${response.status}`);
+      return [];
+    }
+
+    return (await response.json()) as T[];
+  } catch (error) {
+    console.warn(`WordPress request error for path ${path}:`, error);
+    return [];
   }
-
-  return response.json() as Promise<T[]>;
 }
 
 export async function fetchWordPressPosts(): Promise<WordPressPost[]> {
@@ -86,15 +93,20 @@ export async function fetchWordPressMedia(mediaId: number): Promise<WordPressMed
     return null;
   }
 
-  const response = await fetch(`${apiUrl}/media/${mediaId}`, {
-    next: { revalidate: 60 },
-  });
+  try {
+    const response = await fetch(`${apiUrl}/media/${mediaId}`, {
+      next: { revalidate: 60 },
+    });
 
-  if (!response.ok) {
+    if (!response.ok) {
+      return null;
+    }
+
+    return (await response.json()) as WordPressMedia;
+  } catch (error) {
+    console.warn(`Failed to fetch media ID ${mediaId}:`, error);
     return null;
   }
-
-  return response.json() as Promise<WordPressMedia>;
 }
 
 export async function fetchWordPressCollection(path: string): Promise<WordPressCollectionItem[]> {

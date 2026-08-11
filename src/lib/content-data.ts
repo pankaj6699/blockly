@@ -73,10 +73,32 @@ async function mapWordPressPost(post: Awaited<ReturnType<typeof fetchWordPressPo
   const acfCategory = normalizeWordPressString(post.acf?.category || post.acf?.post_category || "");
   const category = acfCategory || "Web3 & Link Building";
 
+  const isFeatured = Boolean(post.acf?.featured || post.acf?.is_featured || post.sticky);
+
   let image: string | undefined;
   if (post.featured_media) {
-    const media = await fetchWordPressMedia(post.featured_media);
-    image = media?.source_url || media?.media_details?.sizes?.large?.source_url || media?.media_details?.sizes?.full?.source_url;
+    try {
+      const media = await fetchWordPressMedia(post.featured_media);
+      image = media?.source_url || media?.media_details?.sizes?.large?.source_url || media?.media_details?.sizes?.full?.source_url;
+    } catch {
+      image = undefined;
+    }
+  }
+
+  let formattedDate = "Recent";
+  if (post.date) {
+    try {
+      const d = new Date(post.date);
+      if (!isNaN(d.getTime())) {
+        formattedDate = d.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        });
+      }
+    } catch {
+      // Keep fallback
+    }
   }
 
   return {
@@ -85,13 +107,10 @@ async function mapWordPressPost(post: Awaited<ReturnType<typeof fetchWordPressPo
     readTime: calculateReadTime(content),
     title,
     excerpt: excerpt || "Read the full article from the WordPress backend.",
-    date: new Date(post.date).toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    }),
+    date: formattedDate,
     content,
     image,
+    featured: isFeatured,
     source: "wordpress",
   };
 }
@@ -103,7 +122,20 @@ export async function getBlogPosts(): Promise<Post[]> {
     try {
       const remotePosts = await fetchWordPressPosts();
       if (remotePosts?.length) {
-        return Promise.all(remotePosts.map(mapWordPressPost));
+        const mapped = await Promise.all(
+          remotePosts.map(async (post) => {
+            try {
+              return await mapWordPressPost(post);
+            } catch (err) {
+              console.warn(`Failed to map WordPress post ${post.slug}:`, err);
+              return null;
+            }
+          })
+        );
+        const validPosts = mapped.filter((p): p is Post => p !== null);
+        if (validPosts.length > 0) {
+          return validPosts;
+        }
       }
     } catch (error) {
       console.warn("Falling back to local posts because WordPress content could not be loaded.", error);
