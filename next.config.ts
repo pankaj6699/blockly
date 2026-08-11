@@ -5,6 +5,7 @@ import type { NextConfig } from "next";
 const repoBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const nextConfig: NextConfig = {
+  output: 'export', // Enable static HTML export
   basePath: repoBasePath,
   assetPrefix: repoBasePath || undefined,
   images: {
@@ -12,12 +13,13 @@ const nextConfig: NextConfig = {
   },
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
-  async redirects() {
-    return [
-      { source: "/insights", destination: "/blog", permanent: true },
-      { source: "/insights/:slug", destination: "/blog/:slug", permanent: true },
-    ];
-  },
+  // Redirects don't work with static export - handle client-side if needed
+  // async redirects() {
+  //   return [
+  //     { source: "/insights", destination: "/blog", permanent: true },
+  //     { source: "/insights/:slug", destination: "/blog/:slug", permanent: true },
+  //   ];
+  // },
 };
 
 export default nextConfig;
