@@ -9,7 +9,18 @@ import { CtaBand } from "@/components/blocks/cta-band";
 
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
-  return posts.map((p) => ({ slug: p.slug }));
+  const slugs = new Set(posts.map((p) => p.slug));
+  slugs.add("breaking-into-the-mena-market-a-2025-crypto-pr-guide");
+  slugs.add("breaking-into-the-mena-market-the-ultimate-2026-crypto-pr-guide");
+  return Array.from(slugs).map((slug) => ({ slug }));
+}
+
+function resolvePostBySlug(posts: Awaited<ReturnType<typeof getBlogPosts>>, slug: string) {
+  let post = posts.find((p) => p.slug === slug);
+  if (!post && slug.includes("breaking-into-the-mena-market")) {
+    post = posts.find((p) => p.slug.includes("breaking-into-the-mena-market"));
+  }
+  return post;
 }
 
 export async function generateMetadata({
@@ -19,7 +30,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const posts = await getBlogPosts();
-  const post = posts.find((p) => p.slug === slug);
+  const post = resolvePostBySlug(posts, slug);
   if (!post) return { title: "Blog" };
   return { title: post.title, description: post.excerpt };
 }
@@ -51,7 +62,7 @@ export default async function BlogPostPage({
 }) {
   const { slug } = await params;
   const posts = await getBlogPosts();
-  const post = posts.find((p) => p.slug === slug);
+  const post = resolvePostBySlug(posts, slug);
   if (!post) notFound();
 
   return (

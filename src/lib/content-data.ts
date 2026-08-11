@@ -134,6 +134,22 @@ export async function getBlogPosts(): Promise<Post[]> {
         );
         const validPosts = mapped.filter((p): p is Post => p !== null);
         if (validPosts.length > 0) {
+          // If WordPress has multiple MENA guide posts (e.g. 2026 ultimate guide post vs legacy 2025 post),
+          // ensure the full 2026 WordPress content is populated across MENA guide routes.
+          const fullMenaPost = validPosts.find(
+            (p) => p.slug.includes("breaking-into-the-mena-market") && (p.content?.length ?? 0) > 3000
+          );
+          if (fullMenaPost) {
+            validPosts.forEach((p) => {
+              if (p.slug.includes("breaking-into-the-mena-market") && (p.content?.length ?? 0) < 3000) {
+                p.content = fullMenaPost.content;
+                p.title = fullMenaPost.title;
+                p.readTime = fullMenaPost.readTime;
+                p.excerpt = fullMenaPost.excerpt;
+                if (fullMenaPost.image) p.image = fullMenaPost.image;
+              }
+            });
+          }
           return validPosts;
         }
       }
