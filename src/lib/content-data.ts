@@ -67,13 +67,29 @@ function calculateReadTime(htmlContent: string): string {
 async function mapWordPressPost(post: Awaited<ReturnType<typeof fetchWordPressPosts>>[number]): Promise<Post> {
   const title = stripHtml(post.title?.rendered ?? "Untitled post");
   const excerpt = stripHtml(post.excerpt?.rendered || post.content?.rendered || "");
-  const content = post.content?.rendered ?? "";
+  let content = post.content?.rendered ?? "";
+
+  // Match local post data by slug to get specific topic content if WP has default dummy text
+  const localMatch = localPosts.find(
+    (lp) =>
+      lp.slug === post.slug ||
+      post.slug.includes(lp.slug) ||
+      lp.slug.includes(post.slug) ||
+      (post.slug.includes("forbes") && lp.slug.includes("forbes")) ||
+      (post.slug.includes("defi") && lp.slug.includes("defi"))
+  );
+
+  // If WordPress returns generic duplicated "Why this matters now" text for a post whose actual topic is different
+  const isGenericDefaultContent = content.includes("Why this matters now") && !post.slug.includes("guest-posts-dominate");
+  if (isGenericDefaultContent && localMatch?.content) {
+    content = localMatch.content;
+  }
 
   // Get category from ACF field or fallback
   const acfCategory = normalizeWordPressString(post.acf?.category || post.acf?.post_category || "");
-  const category = acfCategory || "Web3 & Link Building";
+  const category = acfCategory || localMatch?.category || "Web3 & Link Building";
 
-  const isFeatured = Boolean(post.acf?.featured || post.acf?.is_featured || post.sticky);
+  const isFeatured = Boolean(post.acf?.featured || post.acf?.is_featured || post.sticky || localMatch?.featured);
 
   let image: string | undefined;
   if (post.featured_media) {
