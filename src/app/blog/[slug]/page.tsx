@@ -90,14 +90,12 @@ export default async function BlogPostPage({
 
       <article className="sec-light">
         <Container className="max-w-3xl py-16 sm:py-20">
-          {post.content && post.source === "wordpress" ? (
-            // WordPress content - render as HTML
+          {post.content ? (
             <div
               className="wp-content"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
-          ) : post.source === "local" ? (
-            // Fallback to hardcoded body for local posts only
+          ) : (
             <div className="space-y-8">
               {defaultBody.map((section) => (
                 <section key={section.h}>
@@ -105,11 +103,6 @@ export default async function BlogPostPage({
                   <p className="mt-3 leading-relaxed text-night/70">{section.p}</p>
                 </section>
               ))}
-            </div>
-          ) : (
-            // WordPress post with no content - show message only
-            <div className="space-y-6">
-              <p className="text-sm text-night/50 italic">Full article content coming soon.</p>
             </div>
           )}
 
