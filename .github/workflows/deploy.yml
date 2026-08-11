@@ -44,6 +44,10 @@ jobs:
       # No basePath — site is served at https://blocly.co/ (custom domain root).
       # Do NOT set static_site_generator: next (it injects /blockly basePath and breaks the custom domain).
       - name: Build static site
+        env:
+          NEXT_PUBLIC_CONTENT_SOURCE: wordpress
+          NEXT_PUBLIC_WORDPRESS_URL: https://beige-eel-881953.hostingersite.com
+          NEXT_PUBLIC_WORDPRESS_API_URL: https://beige-eel-881953.hostingersite.com/wp-json/wp/v2
         run: npm run build
 
       - name: Copy CNAME to out directory
