@@ -6,7 +6,7 @@ import { Icon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
 import { Stats } from "@/components/sections/stats";
 import { CtaBand } from "@/components/blocks/cta-band";
-import { values, team, scoringSignals } from "@/lib/site";
+import { getStatsData, getValues, getTeam, getScoringSignals } from "@/lib/content-data";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -14,7 +14,14 @@ export const metadata: Metadata = {
     "Blocly is a crypto-native PR and link-building agency operating natively across Web2 and Web3 — guaranteed editorial placements, measured every time.",
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const [stats, values, team, scoringSignals] = await Promise.all([
+    getStatsData(),
+    getValues(),
+    getTeam(),
+    getScoringSignals(),
+  ]);
+
   return (
     <>
       <PageHero
@@ -26,7 +33,7 @@ export default function AboutPage() {
       {/* Stats */}
       <section className="sec-dark border-t border-line-dark">
         <Container className="py-14">
-          <Stats />
+          <Stats stats={stats} />
         </Container>
       </section>
 

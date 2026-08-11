@@ -1,19 +1,56 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { serviceOptions } from "@/lib/site";
 import { Icon } from "./ui/icon";
 
 const inputClass =
   "w-full rounded-lg border border-cream/12 bg-cream/5 px-4 py-3 text-sm text-cream placeholder:text-cream/35 transition-colors focus:border-accent focus:outline-none";
 const labelClass = "mb-1.5 block font-mono text-[11px] tracking-wide text-cream/60 uppercase";
 
-export function ContactForm() {
+export function ContactForm({ serviceOptions }: { serviceOptions: string[] }) {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+
+    const formData = new FormData(e.currentTarget);
+    const payload = {
+      name: formData.get("name")?.toString() ?? "",
+      company: formData.get("company")?.toString() ?? "",
+      email: formData.get("email")?.toString() ?? "",
+      service: formData.get("service")?.toString() ?? "",
+      message: formData.get("message")?.toString() ?? "",
+    };
+
+    try {
+      // Direct WordPress submission (for GitHub Pages deployment)
+      const wordpressUrl = process.env.NEXT_PUBLIC_WORDPRESS_URL || "";
+      const endpoint = wordpressUrl 
+        ? `${wordpressUrl}/wp-json/blocly/v1/contact`
+        : "/api/contact"; // Fallback to Next.js API route (for local dev or Vercel)
+
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+      if (!response.ok || !result.ok) {
+        setError(result.error || "Submission failed. Please try again.");
+        return;
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      setError("Submission failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   if (submitted) {
@@ -81,14 +118,19 @@ export function ContactForm() {
 
       <button
         type="submit"
-        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-night transition-all hover:brightness-105"
+        disabled={loading}
+        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-night transition-all hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50"
       >
-        Submit Request
+        {loading ? "Sending…" : "Submit Request"}
         <Icon name="arrow-right" size={15} />
       </button>
-      <p className="mt-3 text-center font-mono text-[10px] tracking-wide text-cream/40 uppercase">
-        We respond within 24 hours. No spam, no pushy sales calls.
-      </p>
+      {error ? (
+        <p className="mt-3 text-center text-sm font-medium text-red-400">{error}</p>
+      ) : (
+        <p className="mt-3 text-center font-mono text-[10px] tracking-wide text-cream/40 uppercase">
+          We respond within 24 hours. No spam, no pushy sales calls.
+        </p>
+      )}
     </form>
   );
 }

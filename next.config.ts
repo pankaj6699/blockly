@@ -5,13 +5,13 @@ import type { NextConfig } from "next";
 const repoBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const nextConfig: NextConfig = {
-  output: "export",
   basePath: repoBasePath,
   assetPrefix: repoBasePath || undefined,
   images: {
     unoptimized: true,
   },
   trailingSlash: true,
+  skipTrailingSlashRedirect: true,
   async redirects() {
     return [
       { source: "/insights", destination: "/blog", permanent: true },

@@ -267,4 +267,83 @@ body {
       display: none;
     }
   }
+
+  /* WordPress block content styling */
+  .wp-content {
+    color: rgba(8, 10, 15, 0.78);
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .wp-content h1,
+  .wp-content h2,
+  .wp-content h3,
+  .wp-content h4,
+  .wp-content h5,
+  .wp-content h6,
+  .wp-content h2.wp-block-heading {
+    color: var(--color-night);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .wp-content h2,
+  .wp-content h2.wp-block-heading {
+    font-size: 1.5rem;
+  }
+
+  .wp-content h3 {
+    font-size: 1.25rem;
+  }
+
+  .wp-content p,
+  .wp-content p.wp-block-paragraph {
+    margin-bottom: 1rem;
+  }
+
+  .wp-content ul,
+  .wp-content ol {
+    margin: 1rem 0 1rem 1.25rem;
+    padding-left: 1rem;
+  }
+
+  .wp-content li {
+    margin-bottom: 0.5rem;
+  }
+
+  .wp-content blockquote {
+    border-left: 3px solid var(--color-accent);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: rgba(8, 10, 15, 0.8);
+  }
+
+  .wp-content a {
+    color: var(--color-accent-2);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  .wp-content img,
+  .wp-content figure {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1.5rem 0;
+    border-radius: 0.75rem;
+  }
+
+  .wp-content pre {
+    background: var(--color-ink);
+    color: var(--color-cream);
+    padding: 1rem;
+    border-radius: 0.75rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
 }

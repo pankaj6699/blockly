@@ -1,12 +1,19 @@
 import Link from "next/link";
 import { Logo } from "./logo";
-import { site, nav, services } from "@/lib/site";
 import { Container } from "./ui/section";
 import { Icon } from "./ui/icon";
 
 const socials = ["X / Twitter", "LinkedIn", "Telegram"];
 
-export function SiteFooter() {
+export function SiteFooter({
+  site,
+  nav,
+  services,
+}: {
+  site: { name: string; domain: string; description: string; email: string };
+  nav: readonly { label: string; href: string }[];
+  services: readonly { slug: string; name: string; num: string }[];
+}) {
   return (
     <footer className="border-t border-line-dark bg-ink text-cream">
       <Container className="py-14 sm:py-16">

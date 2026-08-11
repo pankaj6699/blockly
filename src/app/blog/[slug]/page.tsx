@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import { asset } from "@/lib/assets";
-import { posts } from "@/lib/site";
+import { getBlogPosts } from "@/lib/content-data";
 import { Container } from "@/components/ui/section";
 import { Icon } from "@/components/ui/icon";
 import { CtaBand } from "@/components/blocks/cta-band";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const posts = await getBlogPosts();
   return posts.map((p) => ({ slug: p.slug }));
 }
 
@@ -18,12 +18,14 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  const posts = await getBlogPosts();
   const post = posts.find((p) => p.slug === slug);
   if (!post) return { title: "Blog" };
   return { title: post.title, description: post.excerpt };
 }
 
-const body = [
+// Default fallback body for hardcoded posts
+const defaultBody = [
   {
     h: "Why this matters now",
     p: "The way buyers discover crypto and tech brands has shifted. They no longer start with ten blue links — they ask an AI, skim a community thread, or trust an outlet they already read. Visibility is now spread across surfaces most teams never measure, and the brands that win are the ones treating it as a system rather than a series of one-off pushes.",
@@ -48,6 +50,7 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const posts = await getBlogPosts();
   const post = posts.find((p) => p.slug === slug);
   if (!post) notFound();
 
@@ -55,13 +58,10 @@ export default async function BlogPostPage({
     <>
       <section className="sec-dark relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 z-0">
-          <Image
-            src={asset("/images/hero-insights.png")}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-right opacity-70"
+          <img
+            src={post.image || asset("/images/hero-insights.png")}
+            alt={post.title}
+            className="h-full w-full object-cover object-right opacity-70"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/35" />
           <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/40" />
@@ -90,14 +90,28 @@ export default async function BlogPostPage({
 
       <article className="sec-light">
         <Container className="max-w-3xl py-16 sm:py-20">
-          <div className="space-y-8">
-            {body.map((section) => (
-              <section key={section.h}>
-                <h2 className="display text-2xl">{section.h}</h2>
-                <p className="mt-3 leading-relaxed text-night/70">{section.p}</p>
-              </section>
-            ))}
-          </div>
+          {post.content && post.source === "wordpress" ? (
+            // WordPress content - render as HTML
+            <div
+              className="wp-content"
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            />
+          ) : post.source === "local" ? (
+            // Fallback to hardcoded body for local posts only
+            <div className="space-y-8">
+              {defaultBody.map((section) => (
+                <section key={section.h}>
+                  <h2 className="display text-2xl">{section.h}</h2>
+                  <p className="mt-3 leading-relaxed text-night/70">{section.p}</p>
+                </section>
+              ))}
+            </div>
+          ) : (
+            // WordPress post with no content - show message only
+            <div className="space-y-6">
+              <p className="text-sm text-night/50 italic">Full article content coming soon.</p>
+            </div>
+          )}
 
           <div className="mt-12 flex items-center gap-3 rounded-2xl border border-night/10 bg-paper-3 p-6">
             <span className="grid h-10 w-10 place-items-center rounded-full bg-accent text-sm font-semibold text-night">

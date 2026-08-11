@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { nav } from "@/lib/site";
 import { Logo } from "./logo";
 import { Button } from "./ui/button";
 import { Icon } from "./ui/icon";
@@ -21,7 +20,7 @@ function sectionUnderHeader(): "light" | "dark" {
   return "dark";
 }
 
-export function SiteHeader() {
+export function SiteHeader({ nav }: { nav: readonly { label: string; href: string }[] }) {
   const [scrolled, setScrolled] = useState(false);
   const [overLight, setOverLight] = useState(false);
   const [open, setOpen] = useState(false);

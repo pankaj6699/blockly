@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/section";
 import { Icon } from "@/components/ui/icon";
-import { posts } from "@/lib/site";
+import { getBlogPosts } from "@/lib/content-data";
+import type { Post } from "@/lib/content-types";
 import { FeaturedPostSlider } from "./featured-post-slider";
 
-export function Blog() {
+export async function Blog() {
+  const posts = await getBlogPosts();
   const featured = posts.find((p) => p.featured) ?? posts[0];
   const rest = posts.filter((p) => p !== featured);
   const sliderPosts = posts.slice(0, 4);
@@ -76,7 +78,7 @@ export function Blog() {
   );
 }
 
-function PostCard({ post }: { post: (typeof posts)[number] }) {
+function PostCard({ post }: { post: Post }) {
   return (
     <Link
       href={`/blog/${post.slug}`}

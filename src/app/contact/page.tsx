@@ -3,7 +3,7 @@ import { PageHero } from "@/components/page-hero";
 import { Container } from "@/components/ui/section";
 import { ContactForm } from "@/components/contact-form";
 import { Icon } from "@/components/ui/icon";
-import { site, contactHighlights } from "@/lib/site";
+import { getContactHighlights, getServiceOptions, getSiteData } from "@/lib/content-data";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -11,7 +11,13 @@ export const metadata: Metadata = {
     "Tell us about your brand and what you need. We'll put together a campaign plan and get your first placement live within 5 business days.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const [site, contactHighlights, serviceOptions] = await Promise.all([
+    getSiteData(),
+    getContactHighlights(),
+    getServiceOptions(),
+  ]);
+
   return (
     <>
       <PageHero
@@ -51,7 +57,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <ContactForm />
+            <ContactForm serviceOptions={serviceOptions} />
           </div>
         </Container>
       </section>

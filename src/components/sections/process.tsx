@@ -1,8 +1,9 @@
 import { Container } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
-import { process } from "@/lib/site";
+import { getProcessSteps } from "@/lib/content-data";
 
-export function Process() {
+export async function Process() {
+  const process = await getProcessSteps();
   return (
     <>
       <section id="process" className="sec-light scroll-mt-20 border-t border-line-light">

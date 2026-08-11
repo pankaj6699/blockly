@@ -6,7 +6,7 @@ import { Icon } from "@/components/ui/icon";
 import { FaqList } from "@/components/blocks/faq";
 import { Reviews } from "@/components/blocks/reviews";
 import { CtaBand } from "@/components/blocks/cta-band";
-import { pricing, services } from "@/lib/site";
+import { getPricingData, getServicesData } from "@/lib/content-data";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -14,7 +14,10 @@ export const metadata: Metadata = {
     "Transparent pricing for Blocly placements and campaigns. Buy a single placement à la carte, or scale with a monthly retainer. Pay in crypto or card.",
 };
 
-export default function PricingPage() {
+export default async function PricingPage() {
+  const pricing = await getPricingData();
+  const services = await getServicesData();
+
   return (
     <>
       <PageHero

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { Service } from "@/lib/site";
+import type { Service } from "@/lib/content-types";
 import { asset } from "@/lib/assets";
 import { Icon } from "@/components/ui/icon";
 

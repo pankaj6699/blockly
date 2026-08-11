@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { services } from "@/lib/site";
+import { getServiceBySlug, getServicesData } from "@/lib/content-data";
 import { PageHero } from "@/components/page-hero";
 import { Container } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { CtaBand } from "@/components/blocks/cta-band";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const services = await getServicesData();
   return services.map((s) => ({ slug: s.slug }));
 }
 
@@ -18,7 +19,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const service = services.find((s) => s.slug === slug);
+  const service = await getServiceBySlug(slug);
   if (!service) return { title: "Service" };
   return { title: service.name, description: service.description };
 }
@@ -29,9 +30,10 @@ export default async function ServiceDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const service = services.find((s) => s.slug === slug);
+  const service = await getServiceBySlug(slug);
   if (!service) notFound();
 
+  const services = await getServicesData();
   const others = services.filter((s) => s.slug !== slug).slice(0, 3);
 
   return (

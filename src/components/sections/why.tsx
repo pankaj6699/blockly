@@ -1,8 +1,11 @@
 import { Container } from "@/components/ui/section";
-import { reasons } from "@/lib/site";
+import { getStatsData, getWhyReasons } from "@/lib/content-data";
 import { Stats } from "./stats";
 
-export function Why() {
+export async function Why() {
+  const reasons = await getWhyReasons();
+  const stats = await getStatsData();
+
   return (
     <section id="why" className="sec-dark relative scroll-mt-20 border-t border-line-dark">
       <div className="grid-dark pointer-events-none absolute inset-0 opacity-30" />
@@ -27,7 +30,7 @@ export function Why() {
         </div>
 
         <div className="mt-14 overflow-hidden rounded-xl border border-line-dark">
-          <Stats />
+          <Stats stats={stats} />
         </div>
       </Container>
     </section>

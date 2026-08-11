@@ -1,8 +1,9 @@
 import { Container } from "@/components/ui/section";
-import { services } from "@/lib/site";
+import { getServicesData } from "@/lib/content-data";
 import { ServicesSlider } from "./services-slider";
 
-export function Services() {
+export async function Services() {
+  const services = await getServicesData();
   return (
     <section id="services" className="sec-light relative scroll-mt-20 border-t border-line-light">
       <Container className="relative py-20 sm:py-28">

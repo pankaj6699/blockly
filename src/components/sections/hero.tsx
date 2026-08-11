@@ -1,9 +1,10 @@
 import { Container } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
-import { publications } from "@/lib/site";
+import { getPublications } from "@/lib/content-data";
 import { HeroBlockchainBg } from "./hero-blockchain-bg";
 
-function Marquee() {
+async function Marquee() {
+  const publications = await getPublications();
   const row = [...publications, ...publications];
   return (
     <div className="relative z-10 border-y border-line-dark bg-ink-2/95 py-3.5">

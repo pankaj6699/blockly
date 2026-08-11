@@ -23,6 +23,9 @@ export const nav = [
   { label: "About Us", href: "/about" },
 ] as const;
 
+export type NavItem = (typeof nav)[number];
+export type Site = typeof site;
+
 /** Publication logos that scroll in the hero marquee. */
 export const publications: string[] = [
   "Forbes",
@@ -478,6 +481,9 @@ export type Post = {
   excerpt: string;
   date: string;
   featured?: boolean;
+  content?: string;
+  image?: string;
+  source?: "wordpress" | "local";
 };
 
 export const posts: Post[] = [

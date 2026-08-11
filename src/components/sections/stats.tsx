@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { stats } from "@/lib/site";
+import { getStatsData } from "@/lib/content-data";
 
 function CountUp({ value, suffix }: { value: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -38,7 +38,7 @@ function CountUp({ value, suffix }: { value: number; suffix: string }) {
   );
 }
 
-export function Stats() {
+export function Stats({ stats }: { stats: Awaited<ReturnType<typeof getStatsData>> }) {
   return (
     <div className="grid grid-cols-2 divide-x divide-y divide-line-dark bg-ink-2/60 lg:grid-cols-4 lg:divide-y-0">
       {stats.map((s) => (

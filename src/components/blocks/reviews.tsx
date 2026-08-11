@@ -1,7 +1,8 @@
-import { reviews, reviewSummary } from "@/lib/site";
+import { getReviews } from "@/lib/content-data";
 import { Icon } from "@/components/ui/icon";
 
-export function Reviews({ onDark = false }: { onDark?: boolean }) {
+export async function Reviews({ onDark = false }: { onDark?: boolean }) {
+  const { reviews, reviewSummary } = await getReviews();
   const cardBg = onDark
     ? "border-line-dark bg-ink-2"
     : "border-night/10 bg-paper-3";

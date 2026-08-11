@@ -3,7 +3,7 @@ import { PageHero } from "@/components/page-hero";
 import { Container, SectionHeading } from "@/components/ui/section";
 import { Icon } from "@/components/ui/icon";
 import { CtaBand } from "@/components/blocks/cta-band";
-import { scoringSignals, process } from "@/lib/site";
+import { getScoringSignals, getProcessSteps } from "@/lib/content-data";
 
 export const metadata: Metadata = {
   title: "Methodology",
@@ -29,7 +29,12 @@ const principles = [
   },
 ];
 
-export default function MethodologyPage() {
+export default async function MethodologyPage() {
+  const [scoringSignals, process] = await Promise.all([
+    getScoringSignals(),
+    getProcessSteps(),
+  ]);
+
   return (
     <>
       <PageHero

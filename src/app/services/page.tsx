@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { CtaBand } from "@/components/blocks/cta-band";
 import { FaqList } from "@/components/blocks/faq";
-import { services, process } from "@/lib/site";
+import { getProcessSteps, getServicesData } from "@/lib/content-data";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -14,7 +14,10 @@ export const metadata: Metadata = {
     "Blogger outreach, digital PR campaigns, Web3 media placement, brand mentions, and white label services — five precision services for Web2 + Web3 brands.",
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const services = await getServicesData();
+  const process = await getProcessSteps();
+
   return (
     <>
       <PageHero

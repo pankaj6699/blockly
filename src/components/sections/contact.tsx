@@ -1,8 +1,12 @@
 import { Container } from "@/components/ui/section";
-import { contactHighlights } from "@/lib/site";
+import { getContactHighlights, getServiceOptions } from "@/lib/content-data";
 import { ContactForm } from "@/components/contact-form";
 
-export function Contact() {
+export async function Contact() {
+  const [contactHighlights, serviceOptions] = await Promise.all([
+    getContactHighlights(),
+    getServiceOptions(),
+  ]);
   return (
     <section id="contact" className="sec-dark relative scroll-mt-20 border-t border-line-dark">
       <div className="grid-dark pointer-events-none absolute inset-0 opacity-25" />
@@ -34,7 +38,7 @@ export function Contact() {
             </div>
           </div>
 
-          <ContactForm />
+          <ContactForm serviceOptions={serviceOptions} />
         </div>
       </Container>
     </section>

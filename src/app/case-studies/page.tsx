@@ -4,7 +4,7 @@ import { PageHero } from "@/components/page-hero";
 import { Container } from "@/components/ui/section";
 import { Icon } from "@/components/ui/icon";
 import { CtaBand } from "@/components/blocks/cta-band";
-import { caseStudies } from "@/lib/site";
+import { getCaseStudies } from "@/lib/content-data";
 
 export const metadata: Metadata = {
   title: "Case Studies",
@@ -12,7 +12,9 @@ export const metadata: Metadata = {
     "Real Blocly campaigns with measured, attributable outcomes across press, links, and KOL — dated and verifiable, no vanity metrics.",
 };
 
-export default function CaseStudiesPage() {
+export default async function CaseStudiesPage() {
+  const caseStudies = await getCaseStudies();
+
   return (
     <>
       <PageHero

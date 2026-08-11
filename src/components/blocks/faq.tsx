@@ -1,12 +1,14 @@
-import { faqs as defaultFaqs, type Faq } from "@/lib/site";
+import { getFaqs } from "@/lib/content-data";
+import type { Faq } from "@/lib/content-types";
 
-export function FaqList({
-  items = defaultFaqs,
+export async function FaqList({
+  items,
   onDark = false,
 }: {
   items?: Faq[];
   onDark?: boolean;
 }) {
+  const itemsToRender = items ?? (await getFaqs());
   const border = onDark ? "divide-line-dark border-line-dark" : "divide-night/10 border-night/10";
   const bg = onDark ? "bg-ink-2" : "bg-paper-3";
   const q = onDark ? "text-cream" : "text-night";
@@ -15,7 +17,7 @@ export function FaqList({
 
   return (
     <div className={`divide-y overflow-hidden rounded-2xl border ${border} ${bg}`}>
-      {items.map((f) => (
+      {itemsToRender.map((f) => (
         <details key={f.q} className="group px-6 py-5">
           <summary className={`flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-medium ${q}`}>
             {f.q}

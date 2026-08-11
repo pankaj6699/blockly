@@ -3,13 +3,14 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { asset } from "@/lib/assets";
-import { caseStudies } from "@/lib/site";
+import { getCaseStudies } from "@/lib/content-data";
 import { Container } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { CtaBand } from "@/components/blocks/cta-band";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const caseStudies = await getCaseStudies();
   return caseStudies.map((c) => ({ slug: c.slug }));
 }
 
@@ -19,6 +20,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  const caseStudies = await getCaseStudies();
   const study = caseStudies.find((c) => c.slug === slug);
   if (!study) return { title: "Case Study" };
   return { title: `${study.client} — Case Study`, description: study.summary };
@@ -30,6 +32,7 @@ export default async function CaseStudyPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const caseStudies = await getCaseStudies();
   const study = caseStudies.find((c) => c.slug === slug);
   if (!study) notFound();
 

@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
-import type { Post } from "@/lib/site";
+import type { Post } from "@/lib/content-types";
 
 const INTERVAL_MS = 5500;
 
